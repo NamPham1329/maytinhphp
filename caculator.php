@@ -84,48 +84,39 @@ class multiValue{
         for($i = 0; $i<count($this->arrOpr); $i++){
             switch($this->arrOpr[$i]){
                 case "+":
-                    $this->result += ($this->cong($i));
+                    $this->result += ($this->plus($i));
                     break;
                 case "-":
-                    $this->result -= ($this->cong($i));
+                    $this->result -= ($this->plus($i));
                     break;
                 case "x":
-                    $this->result *= ($this->cong($i));
+                    $this->result *= ($this->plus($i));
                     break;
                 case "/":
-                    $this->result /= ($this->cong($i));
+                    $this->result /= ($this->plus($i));
                     break;
                 case "%":
-                    $this->result %= ($this->cong($i));
-                    break;      
+                    $this->result %= ($this->plus($i));
+                    break;
+                case "+-":
+                    $this->result += ($this->plus($i)*(-1));
+                    break; 
+                case "--":
+                    $this->result += ($this->plus($i));
+                    break;
+                case "x-":
+                    $this->result *= ($this->plus($i)*(-1));
+                    break;
+                case "/-":
+                    $this->result /= ($this->plus($i)*(-1));
+                    break;
             }
         }
         return $this->result;
-        
     }
-    function cong($j){
+    function plus($j){
         $total = 0;
         $total += $this->arrNum[$j+1];
-        return $total;
-    }
-    function tru($j){
-        $total = 0;
-        $total -= $this->arrNum[$j+1];
-        return $total;
-    }
-    function nhan($j){
-        $total = 0;
-        $total *= $this->arrNum[$j+1];
-        return $total;
-    }
-    function chia($j){
-        $total = 0;
-        $total /= $this->arrNum[$j+1];
-        return $total;
-    }
-    function phandu($j){
-        $total = 0;
-        $total %= $this->arrNum[$j+1];
         return $total;
     }
 }
