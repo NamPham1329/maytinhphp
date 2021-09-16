@@ -71,7 +71,7 @@ if(isset($_POST['group1']) && isset($_POST['domain'])){
 }
 // $maytinh = new caculator1($giatri1, $giatri2);
 // $ketqua =  $maytinh->chon($pheptinh);
-class caculator{
+class multiValue{
     protected $arrNum = [];
     protected $arrOpr = [];
     protected $result;
@@ -81,33 +81,59 @@ class caculator{
     }
     function processMath(){
         $this->result = $this->arrNum[0];
-        for($i = 1; $i < count($this->arrNum); $i++){
-            switch($this->arrOpr[$i-1]){
+        for($i = 0; $i<count($this->arrOpr); $i++){
+            switch($this->arrOpr[$i]){
                 case "+":
-                    $this->result += $this->arrNum[$i];
+                    $this->result += ($this->cong($i));
                     break;
                 case "-":
-                    $this->result -= $this->arrNum[$i];
+                    $this->result -= ($this->cong($i));
                     break;
                 case "x":
-                    $this->result *= $this->arrNum[$i];
+                    $this->result *= ($this->cong($i));
                     break;
                 case "/":
-                    $this->result /= $this->arrNum[$i];
+                    $this->result /= ($this->cong($i));
                     break;
                 case "%":
-                    $this->result %= $this->arrNum[$i];
+                    $this->result %= ($this->cong($i));
                     break;      
             }
         }
         return $this->result;
+        
+    }
+    function cong($j){
+        $total = 0;
+        $total += $this->arrNum[$j+1];
+        return $total;
+    }
+    function tru($j){
+        $total = 0;
+        $total -= $this->arrNum[$j+1];
+        return $total;
+    }
+    function nhan($j){
+        $total = 0;
+        $total *= $this->arrNum[$j+1];
+        return $total;
+    }
+    function chia($j){
+        $total = 0;
+        $total /= $this->arrNum[$j+1];
+        return $total;
+    }
+    function phandu($j){
+        $total = 0;
+        $total %= $this->arrNum[$j+1];
+        return $total;
     }
 }
 if(isset($_POST['group1']) && isset($_POST['domain'])){
     $content = $_POST['domain'];
     $oprArr = [];
     $numArr = [];
-    preg_match_all('!\D+!', $content, $oprArr);
+    preg_match_all('/\D+/', $content, $oprArr);
     preg_match_all('!\d+!', $content, $numArr);
     if(count($numArr[0]) == count($oprArr[0])){
         if($oprArr[0][0]==="-"){
@@ -121,7 +147,6 @@ if(isset($_POST['group1']) && isset($_POST['domain'])){
     echo "<br>";
     print_r($numArr[0]);
 }
-$maytinh = new caculator($numArr[0],$oprArr[0]);
+$maytinh = new multiValue($numArr[0],$oprArr[0]);
 $ketqua = $maytinh->processMath();
-print_r($numArr[0][0]);
 ?>
