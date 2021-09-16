@@ -84,40 +84,35 @@ class multiValue{
         for($i = 0; $i<count($this->arrOpr); $i++){
             switch($this->arrOpr[$i]){
                 case "+":
-                    $this->result += ($this->plus($i));
+                    $this->result += ($this->arrNum[$i+1]);
                     break;
                 case "-":
-                    $this->result -= ($this->plus($i));
+                    $this->result -= ($this->arrNum[$i+1]);
                     break;
                 case "x":
-                    $this->result *= ($this->plus($i));
+                    $this->result *= ($this->arrNum[$i+1]);
                     break;
                 case "/":
-                    $this->result /= ($this->plus($i));
+                    $this->result /= ($this->arrNum[$i+1]);
                     break;
                 case "%":
-                    $this->result %= ($this->plus($i));
+                    $this->result %= ($this->arrNum[$i+1]);
                     break;
                 case "+-":
-                    $this->result += ($this->plus($i)*(-1));
+                    $this->result += ($this->arrNum[$i+1]*(-1));
                     break; 
                 case "--":
-                    $this->result += ($this->plus($i));
+                    $this->result += ($this->arrNum[$i+1]);
                     break;
                 case "x-":
-                    $this->result *= ($this->plus($i)*(-1));
+                    $this->result *= ($this->arrNum[$i+1]*(-1));
                     break;
                 case "/-":
-                    $this->result /= ($this->plus($i)*(-1));
+                    $this->result /= ($this->arrNum[$i+1]*(-1));
                     break;
             }
         }
         return $this->result;
-    }
-    function plus($j){
-        $total = 0;
-        $total += $this->arrNum[$j+1];
-        return $total;
     }
 }
 if(isset($_POST['group1']) && isset($_POST['domain'])){
